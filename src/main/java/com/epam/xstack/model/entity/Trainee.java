@@ -9,6 +9,7 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -25,4 +26,6 @@ public class Trainee extends User {
 
     @ManyToMany(mappedBy = "traineeList", fetch = FetchType.EAGER)
     private Collection<Trainer> trainers = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "trainee")
+    private List<Training> trainings;
 }

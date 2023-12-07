@@ -25,5 +25,11 @@ public class Trainer extends User{
     @JsonIgnore
     @ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
     private List<Trainee> traineeList = new ArrayList<>();
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "trainer")
+    private List<Training> trainings;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "specialization_id")
+    private TrainingType specialization;
+
 
 }
