@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Data
 @NoArgsConstructor
@@ -27,4 +24,9 @@ public class Trainee extends User {
     private Collection<Trainer> trainers = new ArrayList<>();
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "trainee")
     private List<Training> trainings;
+    @Column(name = "date_of_birth")
+    @Temporal(TemporalType.DATE)
+    private Date dateOfBirth;
+    @Column(name = "address")
+    private String address;
 }

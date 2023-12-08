@@ -1,10 +1,18 @@
 package com.epam.xstack.dao.trainee_dao.impl;
 
 import com.epam.xstack.dao.trainee_dao.TraineeDAO;
+import com.epam.xstack.mappers.trainee_mapper.GetTraineeProfileRequestMapper;
 import com.epam.xstack.mappers.trainee_mapper.TraineeRegistrationRequestMapper;
+import com.epam.xstack.mappers.trainee_mapper.UpdateTraineeProfileRequestMapper;
+import com.epam.xstack.models.dto.trainee.request.GetTraineeProfileRequestDTO;
 import com.epam.xstack.models.dto.trainee.request.TraineeRegistrationRequestDTO;
+import com.epam.xstack.models.dto.trainee.request.UpdateTraineeProfileRequestDTO;
+import com.epam.xstack.models.dto.trainee.response.DeleteResponseDTO;
+import com.epam.xstack.models.dto.trainee.response.GetTraineeProfileResponseDTO;
 import com.epam.xstack.models.dto.trainee.response.TraineeRegistrationResponseDTO;
+import com.epam.xstack.models.dto.trainee.response.UpdateTraineeProfileResponseDTO;
 import com.epam.xstack.models.entity.Trainee;
+import com.epam.xstack.models.enums.Code;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,6 +20,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Random;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -19,6 +28,84 @@ import java.util.Random;
 public class TraineeDAOImpl implements TraineeDAO {
     private final SessionFactory sessionFactory;
     private final TraineeRegistrationRequestMapper registrationRequestMapper;
+    private final GetTraineeProfileRequestMapper getTraineeProfileRequestMapper;
+    private final UpdateTraineeProfileRequestMapper updateTraineeProfileRequestMapper;
+
+
+    @Override
+    @Transactional
+    public DeleteResponseDTO deleteTraineeByUserName(UUID id, GetTraineeProfileRequestDTO requestDTO) {
+        Session session = sessionFactory.getCurrentSession();
+        Trainee trainee = getTraineeProfileRequestMapper.toEntity(requestDTO);
+        Trainee traineeId = session.get(Trainee.class, id);
+
+        if (traineeId.getId().equals(trainee.getId()) && traineeId.getUserName().equals(trainee.getUserName())) {
+            session.remove(traineeId);
+            getTraineeProfileRequestMapper.toDto(trainee);
+            return DeleteResponseDTO
+                    .builder()
+                    .response("Trainee is deleted from database")
+                    .code(Code.STATUS_200_OK)
+                    .build();
+        } else {
+            throw new RuntimeException("Trainee is not available in database");
+        }
+
+    }
+
+    @Override
+    @Transactional
+    public UpdateTraineeProfileResponseDTO updateTraineeProfile(UUID id, UpdateTraineeProfileRequestDTO requestDTO) {
+        Session session = sessionFactory.getCurrentSession();
+        Trainee trainee = updateTraineeProfileRequestMapper.toEntity(requestDTO);
+        Trainee traineeToBeUpdated = session.get(Trainee.class, id);
+
+        traineeToBeUpdated.setUserName(trainee.getUserName());
+        traineeToBeUpdated.setFirstName(trainee.getFirstName());
+        traineeToBeUpdated.setLastName(trainee.getLastName());
+        traineeToBeUpdated.setDateOfBirth(trainee.getDateOfBirth());
+        traineeToBeUpdated.setAddress(trainee.getAddress());
+        traineeToBeUpdated.setIsActive(trainee.getIsActive());
+       
+        session.update(traineeToBeUpdated);
+        updateTraineeProfileRequestMapper.toDto(trainee);
+
+        return UpdateTraineeProfileResponseDTO
+                .builder()
+                .userName(traineeToBeUpdated.getUserName())
+                .firstName(traineeToBeUpdated.getFirstName())
+                .lastName(traineeToBeUpdated.getLastName())
+                .dateOfBirth(traineeToBeUpdated.getDateOfBirth())
+                .address(traineeToBeUpdated.getAddress())
+                .isActive(traineeToBeUpdated.getIsActive())
+                .trainers(traineeToBeUpdated.getTrainers())
+                .build();
+    }
+
+    @Override
+    @Transactional
+    public GetTraineeProfileResponseDTO selectTraineeProfileByUserName(UUID id, GetTraineeProfileRequestDTO requestDTO) {
+        Session session = sessionFactory.getCurrentSession();
+        Trainee trainee = getTraineeProfileRequestMapper.toEntity(requestDTO);
+        Trainee traineeId = session.get(Trainee.class, id);
+
+        if (traineeId.getUserName().equals(trainee.getUserName())) {
+            getTraineeProfileRequestMapper.toDto(trainee);
+            return GetTraineeProfileResponseDTO
+                    .builder()
+                    .firstName(traineeId.getFirstName())
+                    .lastName(traineeId.getLastName())
+                    .address(traineeId.getAddress())
+                    .isActive(traineeId.getIsActive())
+                    .dateOfBirth(traineeId.getDateOfBirth())
+                    .trainers(traineeId.getTrainers())
+                    .build();
+        } else {
+            throw new RuntimeException("Not available");
+        }
+
+    }
+
     @Override
     @Transactional
     public TraineeRegistrationResponseDTO saveTrainee(TraineeRegistrationRequestDTO requestDTO) {

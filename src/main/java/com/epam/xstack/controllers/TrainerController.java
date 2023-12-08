@@ -1,15 +1,18 @@
 package com.epam.xstack.controllers;
 
+import com.epam.xstack.models.dto.trainer.request.GetTrainerProfileRequestDTO;
+import com.epam.xstack.models.dto.trainer.request.UpdateTrainerProfileRequestDTO;
+import com.epam.xstack.models.dto.trainer.response.GetTrainerProfileResponseDTO;
+import com.epam.xstack.models.dto.trainer.response.UpdateTrainerProfileResponseDTO;
 import com.epam.xstack.service.trainer_service.TrainerService;
 import com.epam.xstack.models.dto.trainer.request.TrainerRegistrationRequestDTO;
 import com.epam.xstack.models.dto.trainer.response.TrainerRegistrationResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/trainers")
@@ -20,6 +23,14 @@ public class TrainerController {
     @PostMapping("/save")
     public ResponseEntity<TrainerRegistrationResponseDTO> saveTrainee(@RequestBody TrainerRegistrationRequestDTO requestDTO) {
         return new ResponseEntity<>(trainerService.saveTrainer(requestDTO), HttpStatus.CREATED);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<GetTrainerProfileResponseDTO> selectTrainerProfile(@PathVariable("id") UUID id, @RequestBody GetTrainerProfileRequestDTO requestDTO) {
+        return new ResponseEntity<>(trainerService.selectTrainerProfileByUserName(id, requestDTO), HttpStatus.OK);
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<UpdateTrainerProfileResponseDTO> updateUser(@PathVariable("id") UUID id, @RequestBody UpdateTrainerProfileRequestDTO requestDTO) {
+        return new ResponseEntity<>(trainerService.updateTrainerProfile(id, requestDTO), HttpStatus.OK);
     }
 
 }
