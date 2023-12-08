@@ -1,6 +1,5 @@
-package com.epam.xstack.model.entity;
+package com.epam.xstack.models.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

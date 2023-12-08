@@ -1,7 +1,7 @@
 package com.epam.xstack.dao;
 
-import com.epam.xstack.model.entity.Trainee;
-import com.epam.xstack.model.entity.Trainer;
+import com.epam.xstack.models.entity.Trainee;
+import com.epam.xstack.models.entity.Trainer;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;

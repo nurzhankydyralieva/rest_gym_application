@@ -1,4 +1,4 @@
-package com.epam.xstack.model.entity;
+package com.epam.xstack.models.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

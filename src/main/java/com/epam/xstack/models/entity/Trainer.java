@@ -1,4 +1,4 @@
-package com.epam.xstack.model.entity;
+package com.epam.xstack.models.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -24,6 +24,8 @@ public class Trainer extends User{
     private UUID id;
     @JsonIgnore
     @ManyToMany(cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+    @JoinTable(name = "trainer_trainee_table", joinColumns = @JoinColumn(name = "trainer_id"),
+    inverseJoinColumns = @JoinColumn(name = "trainee_id"))
     private List<Trainee> traineeList = new ArrayList<>();
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL, mappedBy = "trainer")
     private List<Training> trainings;

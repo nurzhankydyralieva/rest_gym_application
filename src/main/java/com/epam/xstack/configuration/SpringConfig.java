@@ -58,7 +58,7 @@ public class SpringConfig implements WebMvcConfigurer {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("com.epam.xstack.model");
+        sessionFactory.setPackagesToScan("com.epam.xstack.models");
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;
