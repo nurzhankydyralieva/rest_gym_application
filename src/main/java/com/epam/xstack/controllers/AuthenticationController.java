@@ -1,5 +1,6 @@
 package com.epam.xstack.controllers;
 
+import com.epam.xstack.models.dto.authentication.AuthenticationChangeLoginRequestDTO;
 import com.epam.xstack.models.dto.authentication.AuthenticationRequestDTO;
 import com.epam.xstack.models.dto.authentication.AuthenticationResponseDTO;
 import com.epam.xstack.service.authentication_service.AuthenticationService;
@@ -19,6 +20,10 @@ public class AuthenticationController {
     @GetMapping("/{id}")
     public ResponseEntity<AuthenticationResponseDTO> login(@PathVariable("id") UUID id, @RequestBody AuthenticationRequestDTO requestDTO) {
         return new ResponseEntity<>(authenticationService.authenticateLogin(id, requestDTO), HttpStatus.OK);
+    }
+    @PutMapping("/update/{id}")
+    public ResponseEntity<AuthenticationResponseDTO> updateLogin(@PathVariable("id") UUID id, @RequestBody AuthenticationChangeLoginRequestDTO requestDTO) {
+        return new ResponseEntity<>(authenticationService.authenticationChangeLogin(id, requestDTO), HttpStatus.OK);
     }
 
 }

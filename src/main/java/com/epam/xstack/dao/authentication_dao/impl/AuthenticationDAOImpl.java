@@ -2,8 +2,10 @@ package com.epam.xstack.dao.authentication_dao.impl;
 
 import com.epam.xstack.dao.authentication_dao.AuthenticationDAO;
 import com.epam.xstack.mappers.authentication_mapper.AuthenticationRequestMapper;
+import com.epam.xstack.models.dto.authentication.AuthenticationChangeLoginRequestDTO;
 import com.epam.xstack.models.dto.authentication.AuthenticationRequestDTO;
 import com.epam.xstack.models.dto.authentication.AuthenticationResponseDTO;
+import com.epam.xstack.models.entity.Trainer;
 import com.epam.xstack.models.entity.User;
 import com.epam.xstack.models.enums.Code;
 import lombok.RequiredArgsConstructor;
@@ -37,6 +39,25 @@ public class AuthenticationDAOImpl implements AuthenticationDAO {
                     .build();
         } else {
             throw new RuntimeException("Not available");
+        }
+    }
+    @Override
+    @Transactional
+    public AuthenticationResponseDTO authenticationChangeLogin(UUID id, AuthenticationChangeLoginRequestDTO requestDTO) {
+        Session session = sessionFactory.getCurrentSession();
+        User userToBeUpdated = session.get(User.class, id);
+
+        if (userToBeUpdated.getId() == id) {
+            userToBeUpdated.setUserName(requestDTO.getUserName());
+            userToBeUpdated.setPassword(requestDTO.getNewPassword());
+            session.update(userToBeUpdated);
+            return AuthenticationResponseDTO
+                    .builder()
+                    .response("Login change response")
+                    .code(Code.STATUS_200_OK)
+                    .build();
+        } else {
+            throw new RuntimeException("not available");
         }
     }
 }

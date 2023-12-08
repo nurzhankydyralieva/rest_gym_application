@@ -2,6 +2,7 @@ package com.epam.xstack.service.authentication_service.impl;
 
 
 import com.epam.xstack.dao.authentication_dao.AuthenticationDAO;
+import com.epam.xstack.models.dto.authentication.AuthenticationChangeLoginRequestDTO;
 import com.epam.xstack.models.dto.authentication.AuthenticationRequestDTO;
 import com.epam.xstack.models.dto.authentication.AuthenticationResponseDTO;
 import com.epam.xstack.service.authentication_service.AuthenticationService;
@@ -18,6 +19,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     public AuthenticationResponseDTO authenticateLogin(UUID id, AuthenticationRequestDTO requestDTO) {
         return authenticationDAO.authenticateLogin(id, requestDTO);
+    }
+    @Override
+    public AuthenticationResponseDTO authenticationChangeLogin(UUID id, AuthenticationChangeLoginRequestDTO requestDTO) {
+        return   authenticationDAO.authenticationChangeLogin(id,requestDTO);
     }
 
 }
