@@ -1,6 +1,7 @@
 package com.epam.xstack.dao;
 
 import com.epam.xstack.models.entity.Trainee;
+import com.epam.xstack.models.entity.TrainingType;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,6 +21,9 @@ public class TestDAO {
         Session session = sessionFactory.getCurrentSession();
         Query<Trainee> fromTrainee = session.createQuery("FROM Trainee ", Trainee.class);
         List<Trainee> resultList = fromTrainee.getResultList();
+
+
         return resultList;
     }
+
 }

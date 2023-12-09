@@ -32,6 +32,7 @@ public class TraineeDAOImpl implements TraineeDAO {
     private final UpdateTraineeProfileRequestMapper updateTraineeProfileRequestMapper;
 
 
+
     @Override
     @Transactional
     public DeleteResponseDTO deleteTraineeByUserName(UUID id, GetTraineeProfileRequestDTO requestDTO) {
@@ -39,9 +40,8 @@ public class TraineeDAOImpl implements TraineeDAO {
         Trainee trainee = getTraineeProfileRequestMapper.toEntity(requestDTO);
         Trainee traineeId = session.get(Trainee.class, id);
 
-        if (traineeId.getId().equals(trainee.getId()) && traineeId.getUserName().equals(trainee.getUserName())) {
+        if (traineeId.getUserName().equals(trainee.getUserName())) {
             session.remove(traineeId);
-            getTraineeProfileRequestMapper.toDto(trainee);
             return DeleteResponseDTO
                     .builder()
                     .response("Trainee is deleted from database")
@@ -66,7 +66,7 @@ public class TraineeDAOImpl implements TraineeDAO {
         traineeToBeUpdated.setDateOfBirth(trainee.getDateOfBirth());
         traineeToBeUpdated.setAddress(trainee.getAddress());
         traineeToBeUpdated.setIsActive(trainee.getIsActive());
-       
+
         session.update(traineeToBeUpdated);
         updateTraineeProfileRequestMapper.toDto(trainee);
 

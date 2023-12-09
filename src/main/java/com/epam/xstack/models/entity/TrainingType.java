@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "training_type")
 public class TrainingType {
@@ -17,8 +16,8 @@ public class TrainingType {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "training_type_id")
     private Long id;
-    @Column(name = "training_type_name")
-    private String trainingTypName;
+    @Column(name = "training_type")
+    private String trainingType;
     @OneToOne(mappedBy = "specialization")
     private Trainer trainer;
 }

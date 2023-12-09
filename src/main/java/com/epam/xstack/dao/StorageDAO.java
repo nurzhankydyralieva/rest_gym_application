@@ -2,6 +2,7 @@ package com.epam.xstack.dao;
 
 import com.epam.xstack.models.entity.Trainee;
 import com.epam.xstack.models.entity.Trainer;
+import com.epam.xstack.models.entity.TrainingType;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -9,6 +10,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
+
 @Component
 @RequiredArgsConstructor
 public class StorageDAO {
@@ -80,6 +83,16 @@ public class StorageDAO {
 
             session.persist(trainer1);
             session.persist(trainer2);
+
+            TrainingType trainingType1 =new TrainingType();
+            trainingType1.setTrainingType("Continuous training");
+            TrainingType trainingType2 = new TrainingType();
+            trainingType2.setTrainingType("Circuit Training");
+            TrainingType trainingType3 = new TrainingType();
+            trainingType3.setTrainingType("Flexibility Training");
+            session.persist(trainingType1);
+            session.persist(trainingType2);
+            session.persist(trainingType3);
 
             session.getTransaction().commit();
         } catch (HibernateException e) {

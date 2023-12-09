@@ -8,6 +8,7 @@ import com.epam.xstack.models.dto.trainee.response.DeleteResponseDTO;
 import com.epam.xstack.models.dto.trainee.response.GetTraineeProfileResponseDTO;
 import com.epam.xstack.models.dto.trainee.response.TraineeRegistrationResponseDTO;
 import com.epam.xstack.models.dto.trainee.response.UpdateTraineeProfileResponseDTO;
+import com.epam.xstack.models.entity.Trainee;
 import com.epam.xstack.service.trainee_service.TraineeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -41,5 +42,7 @@ public class TraineeController {
     public ResponseEntity<DeleteResponseDTO> deleteTraineeByUserName(@PathVariable("id") UUID id, @RequestBody GetTraineeProfileRequestDTO requestDTO) {
         return new ResponseEntity<>(traineeService.deleteTraineeByUserName(id, requestDTO), HttpStatus.OK);
     }
+
+
 
 }

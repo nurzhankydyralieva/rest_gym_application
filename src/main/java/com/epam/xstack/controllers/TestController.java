@@ -2,6 +2,7 @@ package com.epam.xstack.controllers;
 
 import com.epam.xstack.dao.TestDAO;
 import com.epam.xstack.models.entity.Trainee;
+import com.epam.xstack.models.entity.TrainingType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,8 @@ import java.util.List;
 public class TestController {
     private final TestDAO traineeDAO;
     @GetMapping("/trainee")
-    private ResponseEntity<List<Trainee>> show(){
+    public ResponseEntity<List<Trainee>> show(){
         return new ResponseEntity<>(traineeDAO.getAllTrainee(), HttpStatus.OK);
     }
+
 }

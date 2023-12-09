@@ -7,6 +7,7 @@ import com.epam.xstack.models.dto.trainee.response.DeleteResponseDTO;
 import com.epam.xstack.models.dto.trainee.response.GetTraineeProfileResponseDTO;
 import com.epam.xstack.models.dto.trainee.response.TraineeRegistrationResponseDTO;
 import com.epam.xstack.models.dto.trainee.response.UpdateTraineeProfileResponseDTO;
+import com.epam.xstack.models.entity.Trainee;
 
 import java.util.UUID;
 
