@@ -1,12 +1,12 @@
 package com.epam.xstack.service.trainee_service;
 
-import com.epam.xstack.models.dto.trainee.request.GetTraineeProfileRequestDTO;
-import com.epam.xstack.models.dto.trainee.request.TraineeRegistrationRequestDTO;
-import com.epam.xstack.models.dto.trainee.request.UpdateTraineeProfileRequestDTO;
-import com.epam.xstack.models.dto.trainee.response.DeleteResponseDTO;
-import com.epam.xstack.models.dto.trainee.response.GetTraineeProfileResponseDTO;
-import com.epam.xstack.models.dto.trainee.response.TraineeRegistrationResponseDTO;
-import com.epam.xstack.models.dto.trainee.response.UpdateTraineeProfileResponseDTO;
+import com.epam.xstack.models.dto.trainee_dto.request.GetTraineeProfileRequestDTO;
+import com.epam.xstack.models.dto.trainee_dto.request.TraineeRegistrationRequestDTO;
+import com.epam.xstack.models.dto.trainee_dto.request.UpdateTraineeProfileRequestDTO;
+import com.epam.xstack.models.dto.trainee_dto.response.DeleteResponseDTO;
+import com.epam.xstack.models.dto.trainee_dto.response.GetTraineeProfileResponseDTO;
+import com.epam.xstack.models.dto.trainee_dto.response.TraineeRegistrationResponseDTO;
+import com.epam.xstack.models.dto.trainee_dto.response.UpdateTraineeProfileResponseDTO;
 
 import java.util.UUID;
 

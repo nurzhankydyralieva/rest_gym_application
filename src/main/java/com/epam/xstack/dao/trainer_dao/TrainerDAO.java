@@ -1,11 +1,11 @@
 package com.epam.xstack.dao.trainer_dao;
 
-import com.epam.xstack.models.dto.trainer.request.GetTrainerProfileRequestDTO;
-import com.epam.xstack.models.dto.trainer.request.TrainerRegistrationRequestDTO;
-import com.epam.xstack.models.dto.trainer.request.UpdateTrainerProfileRequestDTO;
-import com.epam.xstack.models.dto.trainer.response.GetTrainerProfileResponseDTO;
-import com.epam.xstack.models.dto.trainer.response.TrainerRegistrationResponseDTO;
-import com.epam.xstack.models.dto.trainer.response.UpdateTrainerProfileResponseDTO;
+import com.epam.xstack.models.dto.trainer_dto.request.GetTrainerProfileRequestDTO;
+import com.epam.xstack.models.dto.trainer_dto.request.TrainerRegistrationRequestDTO;
+import com.epam.xstack.models.dto.trainer_dto.request.UpdateTrainerProfileRequestDTO;
+import com.epam.xstack.models.dto.trainer_dto.response.GetTrainerProfileResponseDTO;
+import com.epam.xstack.models.dto.trainer_dto.response.TrainerRegistrationResponseDTO;
+import com.epam.xstack.models.dto.trainer_dto.response.UpdateTrainerProfileResponseDTO;
 
 import java.util.UUID;
 

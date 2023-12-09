@@ -1,6 +1,6 @@
 package com.epam.xstack.mappers.authentication_mapper;
 
-import com.epam.xstack.models.dto.authentication.AuthenticationChangeLoginRequestDTO;
+import com.epam.xstack.models.dto.authentication_dto.AuthenticationChangeLoginRequestDTO;
 import com.epam.xstack.models.entity.User;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;

@@ -1,10 +1,8 @@
 package com.epam.xstack.mappers.training_type_mapper;
 
-import com.epam.xstack.models.dto.training_type.TrainingTypeDTO;
+import com.epam.xstack.models.dto.training_type_dto.TrainingTypeDTO;
 import com.epam.xstack.models.entity.TrainingType;
-import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 
 import java.util.List;
 

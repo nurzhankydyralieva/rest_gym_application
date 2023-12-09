@@ -2,10 +2,9 @@ package com.epam.xstack.dao.authentication_dao.impl;
 
 import com.epam.xstack.dao.authentication_dao.AuthenticationDAO;
 import com.epam.xstack.mappers.authentication_mapper.AuthenticationRequestMapper;
-import com.epam.xstack.models.dto.authentication.AuthenticationChangeLoginRequestDTO;
-import com.epam.xstack.models.dto.authentication.AuthenticationRequestDTO;
-import com.epam.xstack.models.dto.authentication.AuthenticationResponseDTO;
-import com.epam.xstack.models.entity.Trainer;
+import com.epam.xstack.models.dto.authentication_dto.AuthenticationChangeLoginRequestDTO;
+import com.epam.xstack.models.dto.authentication_dto.AuthenticationRequestDTO;
+import com.epam.xstack.models.dto.authentication_dto.AuthenticationResponseDTO;
 import com.epam.xstack.models.entity.User;
 import com.epam.xstack.models.enums.Code;
 import lombok.RequiredArgsConstructor;

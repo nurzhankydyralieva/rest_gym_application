@@ -1,6 +1,6 @@
 package com.epam.xstack.mappers.trainer_mapper;
 
-import com.epam.xstack.models.dto.trainer.request.TrainerRegistrationRequestDTO;
+import com.epam.xstack.models.dto.trainer_dto.request.TrainerRegistrationRequestDTO;
 import com.epam.xstack.models.entity.Trainer;
 import org.mapstruct.Mapper;
 

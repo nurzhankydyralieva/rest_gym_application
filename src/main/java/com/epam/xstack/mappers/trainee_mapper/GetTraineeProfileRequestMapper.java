@@ -1,6 +1,6 @@
 package com.epam.xstack.mappers.trainee_mapper;
 
-import com.epam.xstack.models.dto.trainee.request.GetTraineeProfileRequestDTO;
+import com.epam.xstack.models.dto.trainee_dto.request.GetTraineeProfileRequestDTO;
 import com.epam.xstack.models.entity.Trainee;
 import org.mapstruct.Mapper;
 

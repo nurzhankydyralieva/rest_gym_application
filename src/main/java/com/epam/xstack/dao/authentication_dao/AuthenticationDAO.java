@@ -1,8 +1,8 @@
 package com.epam.xstack.dao.authentication_dao;
 
-import com.epam.xstack.models.dto.authentication.AuthenticationChangeLoginRequestDTO;
-import com.epam.xstack.models.dto.authentication.AuthenticationRequestDTO;
-import com.epam.xstack.models.dto.authentication.AuthenticationResponseDTO;
+import com.epam.xstack.models.dto.authentication_dto.AuthenticationChangeLoginRequestDTO;
+import com.epam.xstack.models.dto.authentication_dto.AuthenticationRequestDTO;
+import com.epam.xstack.models.dto.authentication_dto.AuthenticationResponseDTO;
 
 import java.util.UUID;
 

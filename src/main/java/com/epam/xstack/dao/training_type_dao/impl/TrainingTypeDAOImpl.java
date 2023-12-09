@@ -2,7 +2,7 @@ package com.epam.xstack.dao.training_type_dao.impl;
 
 import com.epam.xstack.dao.training_type_dao.TrainingTypeDAO;
 import com.epam.xstack.mappers.training_type_mapper.TrainingTypeMapper;
-import com.epam.xstack.models.dto.training_type.TrainingTypeDTO;
+import com.epam.xstack.models.dto.training_type_dto.TrainingTypeDTO;
 import com.epam.xstack.models.entity.TrainingType;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
