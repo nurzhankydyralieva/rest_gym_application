@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TrainingResponseDTO {
+public class AddTrainingResponseDTO {
     private String response;
     private Code code;
 }

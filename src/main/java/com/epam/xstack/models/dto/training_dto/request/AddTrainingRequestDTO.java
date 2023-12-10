@@ -13,7 +13,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TrainingRequestDTO {
+public class AddTrainingRequestDTO {
     private Trainee traineeUserName;
     private Trainer trainerUserName;
     private String trainingName;

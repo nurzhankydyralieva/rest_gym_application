@@ -1,6 +1,6 @@
 package com.epam.xstack.mappers.training_mapper;
 
-import com.epam.xstack.models.dto.training_dto.request.TrainingRequestDTO;
+import com.epam.xstack.models.dto.training_dto.request.AddTrainingRequestDTO;
 import com.epam.xstack.models.entity.Training;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
@@ -14,13 +14,13 @@ public interface TrainingMapper {
 
     @Mapping(source = "training.trainee", target = "traineeUserName")
     @Mapping(source = "training.trainer", target = "trainerUserName")
-    TrainingRequestDTO toDto(Training training);
+    AddTrainingRequestDTO toDto(Training training);
 
     @InheritInverseConfiguration
-    Training toEntity(TrainingRequestDTO requestDTO);
+    Training toEntity(AddTrainingRequestDTO requestDTO);
 
-    List<TrainingRequestDTO> toDtos(List<Training> trainings);
+    List<AddTrainingRequestDTO> toDtos(List<Training> trainings);
 
-    List<Training> toEntities(List<TrainingRequestDTO> requestDTOS);
+    List<Training> toEntities(List<AddTrainingRequestDTO> requestDTOS);
 }
 

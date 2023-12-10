@@ -1,8 +1,7 @@
 package com.epam.xstack.controllers;
 
 import com.epam.xstack.dao.training_dao.TrainingDAO;
-import com.epam.xstack.models.dto.training_dto.request.TrainingRequestDTO;
-import com.epam.xstack.models.dto.training_dto.response.TrainingResponseDTO;
+import com.epam.xstack.models.dto.training_dto.request.AddTrainingRequestDTO;
 import com.epam.xstack.service.training_service.TrainingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,7 +25,7 @@ public class TrainingController {
 //    }
 
     @PostMapping("/save")
-    public ResponseEntity<TrainingRequestDTO> saveTrainee(@RequestBody TrainingRequestDTO requestDTO) {
+    public ResponseEntity<AddTrainingRequestDTO> saveTrainee(@RequestBody AddTrainingRequestDTO requestDTO) {
         return new ResponseEntity<>(trainingDAO.saveTrainingTo(requestDTO), HttpStatus.CREATED);
     }
 }
