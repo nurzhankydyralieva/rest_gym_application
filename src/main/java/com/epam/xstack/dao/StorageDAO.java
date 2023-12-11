@@ -35,7 +35,7 @@ public class StorageDAO {
             trainer2.setUserName("Andrea.Bocelli");
             trainer2.setFirstName("Andrea");
             trainer2.setLastName("Bocelli");
-            trainer2.setIsAssigned(true);
+            trainer2.setIsAssigned(false);
             trainer2.setIsActive(true);
             trainer2.setPassword("222");
             trainer2.setCriteria("2 Trainer criteria");
@@ -45,7 +45,7 @@ public class StorageDAO {
             trainee1.setLastName("Jons");
             trainee1.setUserName("Sarah.Jons");
             trainee1.setPassword("trainee");
-            trainee1.setIsAssigned(true);
+            trainee1.setIsAssigned(false);
             trainee1.setIsActive(true);
             trainee1.setCriteria("1 Trainee criteria");
 
@@ -81,8 +81,8 @@ public class StorageDAO {
             trainee2.getTrainers().add(trainer2);
             trainee3.getTrainers().add(trainer2);
 
-            session.persist(trainer1);
-            session.persist(trainer2);
+            session.save(trainer1);
+            session.save(trainer2);
 
             TrainingType trainingType1 =new TrainingType();
             trainingType1.setTrainingType("Continuous training");
@@ -90,9 +90,9 @@ public class StorageDAO {
             trainingType2.setTrainingType("Circuit Training");
             TrainingType trainingType3 = new TrainingType();
             trainingType3.setTrainingType("Flexibility Training");
-            session.persist(trainingType1);
-            session.persist(trainingType2);
-            session.persist(trainingType3);
+            session.save(trainingType1);
+            session.save(trainingType2);
+            session.save(trainingType3);
 
             session.getTransaction().commit();
         } catch (HibernateException e) {

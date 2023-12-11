@@ -16,7 +16,6 @@ import com.epam.xstack.models.enums.Code;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
