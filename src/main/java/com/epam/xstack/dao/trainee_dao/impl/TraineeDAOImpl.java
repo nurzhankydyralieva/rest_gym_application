@@ -78,7 +78,7 @@ public class TraineeDAOImpl implements TraineeDAO {
                 .dateOfBirth(traineeToBeUpdated.getDateOfBirth())
                 .address(traineeToBeUpdated.getAddress())
                 .isActive(traineeToBeUpdated.getIsActive())
-                .trainers(traineeToBeUpdated.getTrainers())
+                .trainers(TrainerMapper.INSTANCE.toDtos(traineeToBeUpdated.getTrainers()))
                 .build();
     }
 
