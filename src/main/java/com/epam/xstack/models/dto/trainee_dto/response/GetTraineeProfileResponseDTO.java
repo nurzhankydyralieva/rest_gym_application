@@ -1,5 +1,6 @@
 package com.epam.xstack.models.dto.trainee_dto.response;
 
+import com.epam.xstack.models.dto.trainer_dto.response.TrainerDTO;
 import com.epam.xstack.models.entity.Trainer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,5 +20,5 @@ public class GetTraineeProfileResponseDTO {
     private Date dateOfBirth;
     private String address;
     private Boolean isActive;
-    private Collection<Trainer> trainers;
+    private Collection<TrainerDTO> trainers;
 }

@@ -1,6 +1,5 @@
 package com.epam.xstack.controllers;
 
-import com.epam.xstack.dao.trainee_dao.TraineeDAO;
 import com.epam.xstack.models.dto.trainee_dto.request.GetTraineeProfileRequestDTO;
 import com.epam.xstack.models.dto.trainee_dto.request.TraineeRegistrationRequestDTO;
 import com.epam.xstack.models.dto.trainee_dto.request.UpdateTraineeProfileRequestDTO;

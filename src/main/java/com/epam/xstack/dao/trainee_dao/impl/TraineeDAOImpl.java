@@ -4,6 +4,7 @@ import com.epam.xstack.dao.trainee_dao.TraineeDAO;
 import com.epam.xstack.mappers.trainee_mapper.GetTraineeProfileRequestMapper;
 import com.epam.xstack.mappers.trainee_mapper.TraineeRegistrationRequestMapper;
 import com.epam.xstack.mappers.trainee_mapper.UpdateTraineeProfileRequestMapper;
+import com.epam.xstack.mappers.trainer_mapper.TrainerMapper;
 import com.epam.xstack.models.dto.trainee_dto.request.GetTraineeProfileRequestDTO;
 import com.epam.xstack.models.dto.trainee_dto.request.TraineeRegistrationRequestDTO;
 import com.epam.xstack.models.dto.trainee_dto.request.UpdateTraineeProfileRequestDTO;
@@ -90,6 +91,7 @@ public class TraineeDAOImpl implements TraineeDAO {
 
         if (traineeId.getUserName().equals(trainee.getUserName())) {
             getTraineeProfileRequestMapper.toDto(trainee);
+
             return GetTraineeProfileResponseDTO
                     .builder()
                     .firstName(traineeId.getFirstName())
@@ -97,12 +99,11 @@ public class TraineeDAOImpl implements TraineeDAO {
                     .address(traineeId.getAddress())
                     .isActive(traineeId.getIsActive())
                     .dateOfBirth(traineeId.getDateOfBirth())
-                    .trainers(traineeId.getTrainers())
+                    .trainers(TrainerMapper.INSTANCE.toDtos(traineeId.getTrainers()))
                     .build();
         } else {
             throw new RuntimeException("Not available");
         }
-
     }
 
     @Override

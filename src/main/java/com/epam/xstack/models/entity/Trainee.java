@@ -20,9 +20,9 @@ public class Trainee extends User {
     @Column(name = "trainee_id")
     private UUID id;
 
-    @ManyToMany(mappedBy = "traineeList", fetch = FetchType.EAGER)
+    @ManyToMany(mappedBy = "traineeList", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Collection<Trainer> trainers = new ArrayList<>();
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "trainee")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "trainee", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<Training> trainings;
     @Column(name = "date_of_birth")
     @Temporal(TemporalType.DATE)
