@@ -1,22 +1,28 @@
 package com.epam.xstack.dao.trainer_dao.impl;
 
 import com.epam.xstack.dao.trainer_dao.TrainerDAO;
+import com.epam.xstack.mappers.trainee_mapper.TraineeMapper;
 import com.epam.xstack.mappers.trainer_mapper.GetTrainerProfileRequestMapper;
+import com.epam.xstack.mappers.trainer_mapper.TrainerMapper;
 import com.epam.xstack.mappers.trainer_mapper.TrainerRegistrationRequestMapper;
 import com.epam.xstack.mappers.trainer_mapper.UpdateTrainerProfileRequestMapper;
 import com.epam.xstack.models.dto.trainer_dto.request.GetTrainerProfileRequestDTO;
 import com.epam.xstack.models.dto.trainer_dto.request.TrainerRegistrationRequestDTO;
 import com.epam.xstack.models.dto.trainer_dto.request.UpdateTrainerProfileRequestDTO;
 import com.epam.xstack.models.dto.trainer_dto.response.GetTrainerProfileResponseDTO;
+import com.epam.xstack.models.dto.trainer_dto.response.TrainerDTO;
 import com.epam.xstack.models.dto.trainer_dto.response.TrainerRegistrationResponseDTO;
 import com.epam.xstack.models.dto.trainer_dto.response.UpdateTrainerProfileResponseDTO;
 import com.epam.xstack.models.entity.Trainer;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -27,6 +33,21 @@ public class TrainerDAOImpl implements TrainerDAO {
     private final TrainerRegistrationRequestMapper registrationRequestMapper;
     private final GetTrainerProfileRequestMapper getTrainerProfileRequestMapper;
     private final UpdateTrainerProfileRequestMapper updateTrainerProfileRequestMapper;
+    private final TrainerMapper trainerMapper;
+
+    //Get not assigned on trainee active trainers
+    @Override
+    @Transactional
+    public Collection<TrainerDTO> selectNotAssignedOnTraineeActiveTrainers() {
+        Session session = sessionFactory.getCurrentSession();
+
+        Query query = session.createQuery("FROM Trainer t WHERE t.isActive = true");
+        List<Trainer> resultList = query.getResultList();
+        Collection<TrainerDTO> trainerDTOS = trainerMapper.toDtos(resultList);
+
+        return trainerDTOS;
+    }
+
     @Override
     @Transactional
     public UpdateTrainerProfileResponseDTO updateTrainerProfile(UUID id, UpdateTrainerProfileRequestDTO requestDTO) {
@@ -49,7 +70,7 @@ public class TrainerDAOImpl implements TrainerDAO {
                 .lastName(trainerToBeUpdated.getLastName())
                 .specialization(trainerToBeUpdated.getSpecialization())
                 .isActive(trainerToBeUpdated.getIsActive())
-                .trainees(trainerToBeUpdated.getTraineeList())
+                .trainees(TraineeMapper.INSTANCE.toDtos(trainerToBeUpdated.getTraineeList()))
                 .build();
     }
 
@@ -69,13 +90,14 @@ public class TrainerDAOImpl implements TrainerDAO {
                     .lastName(trainerId.getLastName())
                     .specialization(trainerId.getSpecialization())
                     .isActive(trainerId.getIsActive())
-                    .traineeList(trainerId.getTraineeList())
+                    .traineeList(TraineeMapper.INSTANCE.toDtos(trainerId.getTraineeList()))
                     .build();
         } else {
             throw new RuntimeException("Not available");
         }
 
     }
+
     @Override
     @Transactional
     public TrainerRegistrationResponseDTO saveTrainer(TrainerRegistrationRequestDTO requestDTO) {

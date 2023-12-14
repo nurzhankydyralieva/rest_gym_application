@@ -1,5 +1,6 @@
 package com.epam.xstack.models.dto.trainer_dto.response;
 
+import com.epam.xstack.models.dto.trainee_dto.response.TraineeDTO;
 import com.epam.xstack.models.entity.Trainee;
 import com.epam.xstack.models.entity.TrainingType;
 import lombok.AllArgsConstructor;
@@ -19,5 +20,5 @@ public class UpdateTrainerProfileResponseDTO {
     private String lastName;
     private TrainingType specialization;
     private Boolean isActive;
-    private List<Trainee> trainees;
+    private List<TraineeDTO> trainees;
 }

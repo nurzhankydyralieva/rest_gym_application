@@ -18,7 +18,6 @@ public class TrainingDAOImpl implements TrainingDAO {
     private final SessionFactory sessionFactory;
     private final TrainingMapper trainingMapper;
 
-// TODO have to finish this method
     @Override
     @Transactional
     public AddTrainingResponseDTO saveTraining(AddTrainingRequestDTO requestDTO) {
@@ -30,24 +29,6 @@ public class TrainingDAOImpl implements TrainingDAO {
                 .builder()
                 .response("Training is saved")
                 .code(Code.STATUS_200_OK)
-                .build();
-    }
-
-    //TODO for checking the response
-    @Override
-    @Transactional
-    public AddTrainingRequestDTO saveTrainingTo(AddTrainingRequestDTO requestDTO) {
-        Session session = sessionFactory.getCurrentSession();
-        Training training = trainingMapper.toEntity(requestDTO);
-        session.save(training);
-        trainingMapper.toDto(training);
-        return AddTrainingRequestDTO
-                .builder()
-                .traineeUserName(training.getTrainee())
-                .trainerUserName(training.getTrainer())
-                .trainingName(training.getTrainingName())
-                .trainingDuration(training.getTrainingDuration())
-                .trainingDate(training.getTrainingDate())
                 .build();
     }
 }

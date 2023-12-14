@@ -20,6 +20,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -31,6 +32,7 @@ public class TraineeDAOImpl implements TraineeDAO {
     private final TraineeRegistrationRequestMapper registrationRequestMapper;
     private final GetTraineeProfileRequestMapper getTraineeProfileRequestMapper;
     private final UpdateTraineeProfileRequestMapper updateTraineeProfileRequestMapper;
+
 
 
     @Override

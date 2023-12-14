@@ -27,7 +27,7 @@ public class StorageDAO {
             trainer1.setFirstName("Tom");
             trainer1.setLastName("Smith");
             trainer1.setIsActive(true);
-            trainer1.setIsAssigned(true);
+            trainer1.setIsAssigned(false);
             trainer1.setPassword("111");
             trainer1.setCriteria("1 Trainer criteria");
 
@@ -35,8 +35,8 @@ public class StorageDAO {
             trainer2.setUserName("Andrea.Bocelli");
             trainer2.setFirstName("Andrea");
             trainer2.setLastName("Bocelli");
-            trainer2.setIsAssigned(false);
-            trainer2.setIsActive(true);
+            trainer2.setIsAssigned(true);
+            trainer2.setIsActive(false);
             trainer2.setPassword("222");
             trainer2.setCriteria("2 Trainer criteria");
 
