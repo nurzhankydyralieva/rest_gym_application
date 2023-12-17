@@ -2,6 +2,7 @@ package com.epam.xstack.dao.trainee_dao.impl;
 
 import com.epam.xstack.dao.trainee_dao.TraineeDAO;
 import com.epam.xstack.mappers.trainee_mapper.GetTraineeProfileRequestMapper;
+import com.epam.xstack.mappers.trainee_mapper.TraineeMapper;
 import com.epam.xstack.mappers.trainee_mapper.TraineeRegistrationRequestMapper;
 import com.epam.xstack.mappers.trainee_mapper.UpdateTraineeProfileRequestMapper;
 import com.epam.xstack.mappers.trainer_mapper.TrainerMapper;
@@ -12,14 +13,18 @@ import com.epam.xstack.models.dto.trainee_dto.response.DeleteResponseDTO;
 import com.epam.xstack.models.dto.trainee_dto.response.GetTraineeProfileResponseDTO;
 import com.epam.xstack.models.dto.trainee_dto.response.TraineeRegistrationResponseDTO;
 import com.epam.xstack.models.dto.trainee_dto.response.UpdateTraineeProfileResponseDTO;
+import com.epam.xstack.models.dto.trainer_dto.response.TrainerDTO;
 import com.epam.xstack.models.entity.Trainee;
+import com.epam.xstack.models.entity.Trainer;
 import com.epam.xstack.models.enums.Code;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -33,7 +38,14 @@ public class TraineeDAOImpl implements TraineeDAO {
     private final GetTraineeProfileRequestMapper getTraineeProfileRequestMapper;
     private final UpdateTraineeProfileRequestMapper updateTraineeProfileRequestMapper;
 
-
+//    public Collection<TrainerDTO> selectNotAssignedOnTraineeActiveTrainers(String userName) {
+//        Session session = sessionFactory.getCurrentSession();
+//        Query<Trainee> query = session.createQuery("SELECT t.trainers FROM Trainee t WHERE t.isActive=true AND t.isAssigned= false  AND t.userName=:userName", Trainee.class);
+//        query.setParameter("userName", userName);
+//        List<Trainee> resultList = query.getResultList();
+//
+//        return trainerDTOS;
+//    }
 
     @Override
     @Transactional
