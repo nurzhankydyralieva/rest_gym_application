@@ -1,10 +1,11 @@
 package com.epam.xstack.controllers;
 
+import com.epam.xstack.models.dto.trainee_dto.request.ActivateDe_ActivateTraineeDTO;
 import com.epam.xstack.models.dto.trainee_dto.request.GetTraineeProfileRequestDTO;
 import com.epam.xstack.models.dto.trainee_dto.request.TraineeRegistrationRequestDTO;
 import com.epam.xstack.models.dto.trainee_dto.request.UpdateTraineeProfileRequestDTO;
-import com.epam.xstack.models.dto.trainee_dto.response.DeleteResponseDTO;
 import com.epam.xstack.models.dto.trainee_dto.response.GetTraineeProfileResponseDTO;
+import com.epam.xstack.models.dto.trainee_dto.response.Ok_200_ResponseDTO;
 import com.epam.xstack.models.dto.trainee_dto.response.TraineeRegistrationResponseDTO;
 import com.epam.xstack.models.dto.trainee_dto.response.UpdateTraineeProfileResponseDTO;
 import com.epam.xstack.service.trainee_service.TraineeService;
@@ -20,6 +21,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class TraineeController {
     private final TraineeService traineeService;
+
 
     @PostMapping("/save")
     public ResponseEntity<TraineeRegistrationResponseDTO> saveTrainee(@RequestBody TraineeRegistrationRequestDTO requestDTO) {
@@ -37,8 +39,13 @@ public class TraineeController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<DeleteResponseDTO> deleteTraineeByUserName(@PathVariable("id") UUID id, @RequestBody GetTraineeProfileRequestDTO requestDTO) {
+    public ResponseEntity<Ok_200_ResponseDTO> deleteTraineeByUserName(@PathVariable("id") UUID id, @RequestBody GetTraineeProfileRequestDTO requestDTO) {
         return new ResponseEntity<>(traineeService.deleteTraineeByUserName(id, requestDTO), HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Ok_200_ResponseDTO> updateActivateDe_ActivateTrainer(@PathVariable("id") UUID id, @RequestBody ActivateDe_ActivateTraineeDTO dto) {
+        return new ResponseEntity<>(traineeService.activateDe_ActivateTrainee(id, dto), HttpStatus.OK);
     }
 
 }

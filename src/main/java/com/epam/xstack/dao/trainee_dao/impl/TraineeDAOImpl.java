@@ -1,31 +1,27 @@
 package com.epam.xstack.dao.trainee_dao.impl;
 
 import com.epam.xstack.dao.trainee_dao.TraineeDAO;
+import com.epam.xstack.mappers.trainee_mapper.ActivateDe_ActivateTraineeMapper;
 import com.epam.xstack.mappers.trainee_mapper.GetTraineeProfileRequestMapper;
-import com.epam.xstack.mappers.trainee_mapper.TraineeMapper;
 import com.epam.xstack.mappers.trainee_mapper.TraineeRegistrationRequestMapper;
 import com.epam.xstack.mappers.trainee_mapper.UpdateTraineeProfileRequestMapper;
 import com.epam.xstack.mappers.trainer_mapper.TrainerMapper;
+import com.epam.xstack.models.dto.trainee_dto.request.ActivateDe_ActivateTraineeDTO;
 import com.epam.xstack.models.dto.trainee_dto.request.GetTraineeProfileRequestDTO;
 import com.epam.xstack.models.dto.trainee_dto.request.TraineeRegistrationRequestDTO;
 import com.epam.xstack.models.dto.trainee_dto.request.UpdateTraineeProfileRequestDTO;
-import com.epam.xstack.models.dto.trainee_dto.response.DeleteResponseDTO;
 import com.epam.xstack.models.dto.trainee_dto.response.GetTraineeProfileResponseDTO;
+import com.epam.xstack.models.dto.trainee_dto.response.Ok_200_ResponseDTO;
 import com.epam.xstack.models.dto.trainee_dto.response.TraineeRegistrationResponseDTO;
 import com.epam.xstack.models.dto.trainee_dto.response.UpdateTraineeProfileResponseDTO;
-import com.epam.xstack.models.dto.trainer_dto.response.TrainerDTO;
 import com.epam.xstack.models.entity.Trainee;
-import com.epam.xstack.models.entity.Trainer;
 import com.epam.xstack.models.enums.Code;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -37,26 +33,40 @@ public class TraineeDAOImpl implements TraineeDAO {
     private final TraineeRegistrationRequestMapper registrationRequestMapper;
     private final GetTraineeProfileRequestMapper getTraineeProfileRequestMapper;
     private final UpdateTraineeProfileRequestMapper updateTraineeProfileRequestMapper;
-
-//    public Collection<TrainerDTO> selectNotAssignedOnTraineeActiveTrainers(String userName) {
-//        Session session = sessionFactory.getCurrentSession();
-//        Query<Trainee> query = session.createQuery("SELECT t.trainers FROM Trainee t WHERE t.isActive=true AND t.isAssigned= false  AND t.userName=:userName", Trainee.class);
-//        query.setParameter("userName", userName);
-//        List<Trainee> resultList = query.getResultList();
-//
-//        return trainerDTOS;
-//    }
+    private final ActivateDe_ActivateTraineeMapper activateDeActivateTraineeMapper;
 
     @Override
     @Transactional
-    public DeleteResponseDTO deleteTraineeByUserName(UUID id, GetTraineeProfileRequestDTO requestDTO) {
+    public Ok_200_ResponseDTO activateDe_ActivateTrainee(UUID id, ActivateDe_ActivateTraineeDTO dto) {
+        Session session = sessionFactory.getCurrentSession();
+        Trainee trainee = activateDeActivateTraineeMapper.toEntity(dto);
+        Trainee existingTrainee = session.get(Trainee.class, id);
+
+        if (existingTrainee.getId() != null) {
+            existingTrainee.setUserName(trainee.getUserName());
+            existingTrainee.setIsActive(trainee.getIsActive());
+            session.update(existingTrainee);
+            activateDeActivateTraineeMapper.toDto(trainee);
+            return Ok_200_ResponseDTO
+                    .builder()
+                    .code(Code.STATUS_200_OK)
+                    .response("Activate DeActivate Trainee updated")
+                    .build();
+        } else {
+            throw new RuntimeException("Not available");
+        }
+    }
+
+    @Override
+    @Transactional
+    public Ok_200_ResponseDTO deleteTraineeByUserName(UUID id, GetTraineeProfileRequestDTO requestDTO) {
         Session session = sessionFactory.getCurrentSession();
         Trainee trainee = getTraineeProfileRequestMapper.toEntity(requestDTO);
         Trainee traineeId = session.get(Trainee.class, id);
 
         if (traineeId.getUserName().equals(trainee.getUserName())) {
             session.remove(traineeId);
-            return DeleteResponseDTO
+            return Ok_200_ResponseDTO
                     .builder()
                     .response("Trainee is deleted from database")
                     .code(Code.STATUS_200_OK)

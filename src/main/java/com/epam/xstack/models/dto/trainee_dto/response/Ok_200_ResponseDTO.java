@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DeleteResponseDTO {
+public class Ok_200_ResponseDTO {
     private String response;
     private Code code;
 }

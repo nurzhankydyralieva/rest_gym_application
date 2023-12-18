@@ -1,6 +1,8 @@
 package com.epam.xstack.controllers;
 
 import com.epam.xstack.dao.trainer_dao.TrainerDAO;
+import com.epam.xstack.models.dto.trainee_dto.response.Ok_200_ResponseDTO;
+import com.epam.xstack.models.dto.trainer_dto.request.ActivateDe_ActivateTrainerDTO;
 import com.epam.xstack.models.dto.trainer_dto.request.GetTrainerProfileRequestDTO;
 import com.epam.xstack.models.dto.trainer_dto.request.TrainerRegistrationRequestDTO;
 import com.epam.xstack.models.dto.trainer_dto.request.UpdateTrainerProfileRequestDTO;
@@ -36,6 +38,11 @@ public class TrainerController {
     @PutMapping("/update/{id}")
     public ResponseEntity<UpdateTrainerProfileResponseDTO> updateUser(@PathVariable("id") UUID id, @RequestBody UpdateTrainerProfileRequestDTO requestDTO) {
         return new ResponseEntity<>(trainerService.updateTrainerProfile(id, requestDTO), HttpStatus.OK);
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<Ok_200_ResponseDTO> updateActivateDe_ActivateTrainer(@PathVariable("id") UUID id, @RequestBody ActivateDe_ActivateTrainerDTO dto) {
+        return new ResponseEntity<>(trainerService.activateDe_ActivateTrainer(id, dto), HttpStatus.OK);
     }
 
     private final TrainerDAO trainerDAO;

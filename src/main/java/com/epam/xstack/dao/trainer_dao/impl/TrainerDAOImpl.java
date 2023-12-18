@@ -2,10 +2,9 @@ package com.epam.xstack.dao.trainer_dao.impl;
 
 import com.epam.xstack.dao.trainer_dao.TrainerDAO;
 import com.epam.xstack.mappers.trainee_mapper.TraineeMapper;
-import com.epam.xstack.mappers.trainer_mapper.GetTrainerProfileRequestMapper;
-import com.epam.xstack.mappers.trainer_mapper.TrainerMapper;
-import com.epam.xstack.mappers.trainer_mapper.TrainerRegistrationRequestMapper;
-import com.epam.xstack.mappers.trainer_mapper.UpdateTrainerProfileRequestMapper;
+import com.epam.xstack.mappers.trainer_mapper.*;
+import com.epam.xstack.models.dto.trainee_dto.response.Ok_200_ResponseDTO;
+import com.epam.xstack.models.dto.trainer_dto.request.ActivateDe_ActivateTrainerDTO;
 import com.epam.xstack.models.dto.trainer_dto.request.GetTrainerProfileRequestDTO;
 import com.epam.xstack.models.dto.trainer_dto.request.TrainerRegistrationRequestDTO;
 import com.epam.xstack.models.dto.trainer_dto.request.UpdateTrainerProfileRequestDTO;
@@ -14,6 +13,7 @@ import com.epam.xstack.models.dto.trainer_dto.response.TrainerDTO;
 import com.epam.xstack.models.dto.trainer_dto.response.TrainerRegistrationResponseDTO;
 import com.epam.xstack.models.dto.trainer_dto.response.UpdateTrainerProfileResponseDTO;
 import com.epam.xstack.models.entity.Trainer;
+import com.epam.xstack.models.enums.Code;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -46,6 +46,30 @@ public class TrainerDAOImpl implements TrainerDAO {
         Collection<TrainerDTO> trainerDTOS = trainerMapper.toDtos(resultList);
 
         return trainerDTOS;
+    }
+
+    private final ActivateDe_ActivateTrainerMapper activateDeActivateTrainerMapper;
+
+    @Override
+    @Transactional
+    public Ok_200_ResponseDTO activateDe_ActivateTrainer(UUID id, ActivateDe_ActivateTrainerDTO dto) {
+        Session session = sessionFactory.getCurrentSession();
+        Trainer trainer = activateDeActivateTrainerMapper.toEntity(dto);
+        Trainer existingTrainer = session.get(Trainer.class, id);
+
+        if (existingTrainer.getId() != null) {
+            existingTrainer.setUserName(trainer.getUserName());
+            existingTrainer.setIsActive(trainer.getIsActive());
+            session.update(existingTrainer);
+            activateDeActivateTrainerMapper.toDto(trainer);
+            return Ok_200_ResponseDTO
+                    .builder()
+                    .code(Code.STATUS_200_OK)
+                    .response("Activate DeActivate Trainer updated")
+                    .build();
+        }else {
+            throw new RuntimeException("Not available");
+        }
     }
 
     @Override

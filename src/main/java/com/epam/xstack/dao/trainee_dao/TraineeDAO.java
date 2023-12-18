@@ -1,16 +1,15 @@
 package com.epam.xstack.dao.trainee_dao;
 
+import com.epam.xstack.models.dto.trainee_dto.request.ActivateDe_ActivateTraineeDTO;
 import com.epam.xstack.models.dto.trainee_dto.request.GetTraineeProfileRequestDTO;
 import com.epam.xstack.models.dto.trainee_dto.request.TraineeRegistrationRequestDTO;
 import com.epam.xstack.models.dto.trainee_dto.request.UpdateTraineeProfileRequestDTO;
-import com.epam.xstack.models.dto.trainee_dto.response.DeleteResponseDTO;
+import com.epam.xstack.models.dto.trainee_dto.response.Ok_200_ResponseDTO;
 import com.epam.xstack.models.dto.trainee_dto.response.GetTraineeProfileResponseDTO;
 import com.epam.xstack.models.dto.trainee_dto.response.TraineeRegistrationResponseDTO;
 import com.epam.xstack.models.dto.trainee_dto.response.UpdateTraineeProfileResponseDTO;
-import com.epam.xstack.models.entity.Trainee;
-import com.epam.xstack.models.entity.Trainer;
+import com.epam.xstack.models.dto.trainer_dto.request.ActivateDe_ActivateTrainerDTO;
 
-import java.util.List;
 import java.util.UUID;
 
 public interface TraineeDAO {
@@ -20,6 +19,7 @@ public interface TraineeDAO {
 
     UpdateTraineeProfileResponseDTO updateTraineeProfile(UUID id, UpdateTraineeProfileRequestDTO requestDTO);
 
-    DeleteResponseDTO deleteTraineeByUserName(UUID id, GetTraineeProfileRequestDTO requestDTO);
+    Ok_200_ResponseDTO deleteTraineeByUserName(UUID id, GetTraineeProfileRequestDTO requestDTO);
+    Ok_200_ResponseDTO activateDe_ActivateTrainee(UUID id, ActivateDe_ActivateTraineeDTO dto);
 
 }
